@@ -4,11 +4,24 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Resume | Portfolio</title>
+
+  <!-- Your existing global CSS -->
   <link rel="stylesheet" href="css/style.css" />
+
+  <!-- Inline CSS for this page (buttons + PDF container) -->
   <style>
-    /* ---------------------------------------------
-       Simple styling for the Download and Fullscreen buttons
-    ---------------------------------------------- */
+    :root {
+      --button-bg: #64b5f6;
+      --button-hover: #90caf9;
+      --button-color: #121212;
+    }
+
+    body {
+      background-color: #121212;
+      color: #e0e0e0;
+      font-family: 'Lato', sans-serif;
+    }
+
     .resume-container {
       max-width: 960px;
       margin: 2rem auto;
@@ -27,10 +40,10 @@
     .action-btn {
       display: inline-block;
       padding: 0.7rem 1.5rem;
-      font-family: var(--body-font, Arial, sans-serif);
+      font-family: 'Lato', sans-serif;
       font-size: 1rem;
-      color: #121212;
-      background-color: #64b5f6;
+      color: var(--button-color);
+      background-color: var(--button-bg);
       border: none;
       border-radius: 4px;
       text-decoration: none;
@@ -38,20 +51,30 @@
       transition: background-color 0.2s ease;
     }
     .action-btn:hover {
-      background-color: #90caf9;
+      background-color: var(--button-hover);
     }
 
-    /* Ensure the iframe takes most of the viewport height */
-    .resume-embed {
-      width: 100%;
-      height: 80vh;
+    /* Container for rendered PDF pages */
+    #pdf-container {
       border: 1px solid #333;
       border-radius: 8px;
+      overflow-y: auto;
+      background-color: #1e1e1e;
+      padding: 1rem;
+      max-height: 80vh;
+    }
+
+    /* Each canvas (PDF page) sits centered */
+    .pdf-page-canvas {
+      margin: 1rem auto;
+      display: block;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+      border: 1px solid #444;
     }
 
     @media (max-width: 768px) {
-      .resume-embed {
-        height: 60vh;
+      #pdf-container {
+        max-height: 60vh;
       }
     }
   </style>
@@ -85,32 +108,60 @@
       </button>
     </div>
 
-    <!-- EMBEDDED PDF (hides toolbar via URL parameters) -->
-    <iframe 
-      id="resume-iframe"
-      src="my_resume.pdf#toolbar=0&navpanes=0&scrollbar=0" 
-      class="resume-embed"
-    >
-      Your browser does not support embedding PDFs.  
-      You can <a href="my_resume.pdf" download>download the resume here</a>.
-    </iframe>
+    <!-- PDF.js render container (no default toolbar here) -->
+    <div id="pdf-container"></div>
   </main>
 
+  <!-- PDF.js library -->
+  <script src="pdfjs/pdf.min.js"></script>
+  <!-- If you stored the worker in a different path, adjust accordingly -->
   <script>
-    // ---------------------------------------------
-    // FULLSCREEN BUTTON LOGIC
-    // ---------------------------------------------
-    document.addEventListener("DOMContentLoaded", () => {
-      const fsBtn = document.getElementById("fullscreen-btn");
-      const iframe = document.getElementById("resume-iframe");
+    // Tell PDF.js where to find its worker script
+    pdfjsLib.GlobalWorkerOptions.workerSrc = "pdfjs/pdf.worker.min.js";
+  </script>
 
+  <!-- Script to load & render the PDF pages -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const url = "my_resume.pdf"; // path to your PDF file
+      const container = document.getElementById("pdf-container");
+
+      // Load the PDF document
+      pdfjsLib.getDocument(url).promise.then(pdfDoc => {
+        // For each page, create a <canvas> and render it
+        for (let pageNum = 1; pageNum <= pdfDoc.numPages; pageNum++) {
+          pdfDoc.getPage(pageNum).then(page => {
+            const viewport = page.getViewport({ scale: 1.25 }); 
+            // Adjust scale (1.25) for clarity; change as needed
+
+            const canvas = document.createElement("canvas");
+            canvas.classList.add("pdf-page-canvas");
+            canvas.height = viewport.height;
+            canvas.width = viewport.width;
+            container.appendChild(canvas);
+
+            const context = canvas.getContext("2d");
+            const renderContext = {
+              canvasContext: context,
+              viewport: viewport
+            };
+            page.render(renderContext);
+          });
+        }
+      }).catch(err => {
+        console.error("Error loading PDF:", err);
+        container.textContent = "Failed to load resume.";
+      });
+
+      // Fullscreen button logic
+      const fsBtn = document.getElementById("fullscreen-btn");
       fsBtn.addEventListener("click", () => {
-        if (iframe.requestFullscreen) {
-          iframe.requestFullscreen();
-        } else if (iframe.webkitRequestFullscreen) {
-          iframe.webkitRequestFullscreen();
-        } else if (iframe.msRequestFullscreen) {
-          iframe.msRequestFullscreen();
+        if (container.requestFullscreen) {
+          container.requestFullscreen();
+        } else if (container.webkitRequestFullscreen) {
+          container.webkitRequestFullscreen();
+        } else if (container.msRequestFullscreen) {
+          container.msRequestFullscreen();
         }
       });
     });
