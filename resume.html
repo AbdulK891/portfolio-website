@@ -69,7 +69,7 @@
       overflow: hidden;
     }
 
-    /* The <embed> inside, filling its parent */
+    /* The <iframe> inside, filling its parent */
     #pdf-embed {
       width: 100%;
       height: 100%;
@@ -112,21 +112,17 @@
       </button>
     </div>
 
-    <!-- Embedded PDF (no PDF.js needed) -->
+    <!-- Embedded PDF using iframe -->
     <div id="pdf-container">
-      <!-- The "#toolbar=0&navpanes=0" fragment hides the browser’s default PDF controls -->
-      <embed 
+      <iframe 
         id="pdf-embed"
-        src="my_resume.pdf#toolbar=0&navpanes=0"
+        src="my_resume.pdf#toolbar=0&navpanes=0&scrollbar=0"
         type="application/pdf"
+        frameborder="0"
       >
-      <!-- If the browser can’t display an embed, show a fallback link: -->
-      <p style="color: #e0e0e0; padding: 1rem;">
-        Your browser can’t display the resume inline. 
-        <a href="my_resume.pdf" download style="color: var(--button-bg);">
-          Download it here
-        </a>.
-      </p>
+        Your browser doesn’t support PDF viewing. 
+        <a href="my_resume.pdf" download style="color: var(--button-bg);">Download it here</a>.
+      </iframe>
     </div>
   </main>
 
