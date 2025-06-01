@@ -23,31 +23,70 @@
   <main class="container">
     <section class="projects-section">
       <h2 class="section-title">Project Portfolio</h2>
+
+      <!-- FILTER DROPDOWN -->
+      <div class="filter-container">
+        <label for="project-filter">Filter by:</label>
+        <select id="project-filter">
+          <option value="all" selected>All</option>
+          <option value="python">Python</option>
+          <option value="r">R</option>
+          <option value="excel">Excel</option>
+          <option value="tableau">Tableau</option>
+          <option value="machine-learning">Machine Learning</option>
+          <option value="nlp">NLP</option>
+        </select>
+      </div>
+
+      <!-- PROJECTS LIST (dummy placeholders with data-category attributes) -->
       <ul class="projects-list">
-        <li>
-          <h3 class="project-title">1. Tesla Stock Price Prediction and Sentiment Analysis</h3>
-          <p class="project-desc">
-            Developed forecasting models using Random Forest and XGBoost with sentiment analysis from multiple news sources and social media. 
-            <a href="[GitHub-Link-Placeholder]" target="_blank" class="project-link">GitHub</a>
-          </p>
+        <!-- Python Projects -->
+        <li class="project-item" data-category="python">
+          <h3 class="project-title">Python Project A</h3>
+          <p class="project-desc">Dummy Python project placeholder description.</p>
         </li>
-        <li>
-          <h3 class="project-title">2. Credit Risk Assessment Model</h3>
-          <p class="project-desc">
-            Built an interpretable credit scoring model predicting default probabilities with actionable insights. 
-            <a href="[GitHub-Link-Placeholder]" target="_blank" class="project-link">GitHub</a>
-          </p>
+        <li class="project-item" data-category="python">
+          <h3 class="project-title">Python Project B</h3>
+          <p class="project-desc">Dummy Python project placeholder description.</p>
         </li>
-        <li>
-          <h3 class="project-title">3. Fraud Detection in Transaction Networks</h3>
-          <p class="project-desc">
-            Implemented Graph Neural Networks (GNN) for real-time detection of fraudulent transactions. 
-            <a href="[GitHub-Link-Placeholder]" target="_blank" class="project-link">GitHub</a>
-          </p>
+
+        <!-- R Projects -->
+        <li class="project-item" data-category="r">
+          <h3 class="project-title">R Project A</h3>
+          <p class="project-desc">Dummy R project placeholder description.</p>
         </li>
-        <!-- Add additional projects here in the same format -->
+        <li class="project-item" data-category="r">
+          <h3 class="project-title">R Project B</h3>
+          <p class="project-desc">Dummy R project placeholder description.</p>
+        </li>
+
+        <!-- Excel Projects -->
+        <li class="project-item" data-category="excel">
+          <h3 class="project-title">Excel Dashboard A</h3>
+          <p class="project-desc">Dummy Excel dashboard placeholder description.</p>
+        </li>
+
+        <!-- Tableau Projects -->
+        <li class="project-item" data-category="tableau">
+          <h3 class="project-title">Tableau Viz A</h3>
+          <p class="project-desc">Dummy Tableau viz placeholder description.</p>
+        </li>
+
+        <!-- Machine Learning Projects -->
+        <li class="project-item" data-category="machine-learning">
+          <h3 class="project-title">ML Model A</h3>
+          <p class="project-desc">Dummy machine learning project placeholder description.</p>
+        </li>
+
+        <!-- NLP Projects -->
+        <li class="project-item" data-category="nlp">
+          <h3 class="project-title">NLP Pipeline A</h3>
+          <p class="project-desc">Dummy NLP project placeholder description.</p>
+        </li>
       </ul>
     </section>
   </main>
+
+  <script src="js/script.js"></script>
 </body>
 </html>
