@@ -26,13 +26,21 @@
     .contact-container {
       display: flex;
       justify-content: center;
-      align-items: flex-start;
+      align-items: flex-start;  /* keep left & right aligned at top */
       gap: 2rem;
       max-width: 960px;
       margin: 0 auto 2rem;
       padding: 0 1rem;
     }
 
+    /* Ensure the divider takes up the full height of its container */
+    .divider {
+      width: 1px;
+      background-color: #444;
+      align-self: stretch;  /* stretch from top to bottom of container */
+    }
+
+    /* On mobile, hide divider and stack */
     @media (max-width: 768px) {
       .contact-container {
         flex-direction: column;
@@ -98,13 +106,6 @@
       background-color: #90caf9;
     }
 
-    .divider {
-      width: 1px;
-      background-color: #444;
-      height: auto;
-      margin-top: 2.5rem; /* Aligns with contact-info padding-top */
-    }
-
     .contact-info {
       flex: 1 1 300px;
       max-width: 350px;
@@ -156,7 +157,10 @@
   <div class="contact-container">
     <!-- Contact Form -->
     <div class="contact-form">
-      <form id="contact-form" action="YOUR_SCRIPT_URL_HERE" method="POST">
+      <form id="contact-form"
+            action="https://script.google.com/macros/s/AKfycbw2lNOcwsDC_RZfyf_KseWL72CmoCwJMvqZSNXToiYg5VUJl16xwsN4fMkFgopjHTfULg/exec"
+            method="POST"
+      >
         <div class="form-group">
           <label for="name">Name</label>
           <input type="text" id="name" name="name" required />
@@ -185,22 +189,26 @@
       </div>
     </div>
 
-    <!-- Divider Line -->
+    <!-- Divider Line (now full height) -->
     <div class="divider"></div>
 
     <!-- Contact Info Section -->
     <div class="contact-info">
-      <p><strong>Email:</strong> 
+      <p><strong>Email:</strong>
         <a href="mailto:abdul-khayyum.981@gmail.com">abdul-khayyum.981@gmail.com</a>
       </p>
-      <p><strong>Phone:</strong> 
+      <p><strong>Phone:</strong>
         <a href="tel:+17328032566">(732) 803-2566</a>
       </p>
-      <p><strong>LinkedIn:</strong> 
-        <a href="https://www.linkedin.com/in/abdul-khayyum-farooqui/" target="_blank">linkedin.com/in/abdul-khayyum-farooqui</a>
+      <p><strong>LinkedIn:</strong>
+        <a href="https://www.linkedin.com/in/abdul-khayyum-farooqui/" target="_blank">
+          linkedin.com/in/abdul-khayyum-farooqui
+        </a>
       </p>
-      <p><strong>GitHub:</strong> 
-        <a href="https://github.com/abdulk891" target="_blank">github.com/abdulk891</a>
+      <p><strong>GitHub:</strong>
+        <a href="https://github.com/abdulk891" target="_blank">
+          github.com/abdulk891
+        </a>
       </p>
     </div>
   </div>
@@ -213,12 +221,17 @@
       const locationInput  = document.getElementById("location");
       const thankYouDiv    = document.getElementById("thank-you");
 
+      // Initialize timestamp immediately
       timestampInput.value = new Date().toISOString();
 
+      // Attempt to get geolocation
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
           (pos) => {
-            locationInput.value = pos.coords.latitude.toFixed(4) + ", " + pos.coords.longitude.toFixed(4);
+            locationInput.value =
+              pos.coords.latitude.toFixed(4)
+              + ", "
+              + pos.coords.longitude.toFixed(4);
           },
           () => {
             locationInput.value = "Not provided";
@@ -245,7 +258,7 @@
               timestampInput.value = new Date().toISOString();
               locationInput.value = "Not provided";
               thankYouDiv.style.display = "none";
-            }, 2000);
+            }, 3500);
           } else {
             alert("Error sending form: " + data.message);
           }
