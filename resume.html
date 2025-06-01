@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Resume | Portfolio</title>
 
-  <!-- Your existing global CSS -->
+  <!-- Your existing global CSS (if any) -->
   <link rel="stylesheet" href="css/style.css" />
 
-  <!-- Inline CSS for this page (buttons + PDF container) -->
+  <!-- Inline CSS specific to this page -->
   <style>
     :root {
       --button-bg: #64b5f6;
@@ -20,8 +20,11 @@
       background-color: #121212;
       color: #e0e0e0;
       font-family: 'Lato', sans-serif;
+      margin: 0;
+      padding: 0;
     }
 
+    /* Container for the entire resume section */
     .resume-container {
       max-width: 960px;
       margin: 2rem auto;
@@ -29,6 +32,7 @@
       text-align: center;
     }
 
+    /* Grouping for the two buttons */
     .button-group {
       margin-bottom: 1.5rem;
       display: flex;
@@ -37,6 +41,7 @@
       flex-wrap: wrap;
     }
 
+    /* Styling for both Download & Fullscreen buttons */
     .action-btn {
       display: inline-block;
       padding: 0.7rem 1.5rem;
@@ -54,7 +59,7 @@
       background-color: var(--button-hover);
     }
 
-    /* Container for rendered PDF pages */
+    /* This <div> will contain rendered PDF pages */
     #pdf-container {
       border: 1px solid #333;
       border-radius: 8px;
@@ -64,7 +69,7 @@
       max-height: 80vh;
     }
 
-    /* Each canvas (PDF page) sits centered */
+    /* Each PDF page is drawn into a <canvas> with this class */
     .pdf-page-canvas {
       margin: 1rem auto;
       display: block;
@@ -80,7 +85,7 @@
   </style>
 </head>
 <body>
-  <!-- Navigation Bar -->
+  <!-- Navigation Bar (existing site nav) -->
   <nav class="navbar">
     <ul class="nav-list">
       <li><a href="index.html" class="nav-item">Home</a></li>
@@ -92,70 +97,84 @@
     </ul>
   </nav>
 
-  <!-- Main Content -->
+  <!-- Main Resume Section -->
   <main class="resume-container">
     <h2 class="section-title">Resume</h2>
 
-    <!-- BUTTONS: Download and Fullscreen -->
+    <!-- BUTTONS: Download PDF and Fullscreen -->
     <div class="button-group">
-      <!-- Download Resume Button -->
+      <!-- 1) Download button -->
       <a href="my_resume.pdf" download class="action-btn">
         Download Resume
       </a>
-      <!-- Fullscreen Button -->
+      <!-- 2) Fullscreen button -->
       <button id="fullscreen-btn" class="action-btn">
         View Full Screen
       </button>
     </div>
 
-    <!-- PDF.js render container (no default toolbar here) -->
-    <div id="pdf-container"></div>
+    <!-- PDF.js will render pages inside this container -->
+    <div id="pdf-container">
+      <!-- If PDF.js fails, we’ll show a fallback below via script -->
+    </div>
   </main>
 
-  <!-- PDF.js library -->
-  <script src="pdfjs/pdf.min.js"></script>
-  <!-- If you stored the worker in a different path, adjust accordingly -->
+  <!-- 1. PDF.js library from a CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
   <script>
-    // Tell PDF.js where to find its worker script
-    pdfjsLib.GlobalWorkerOptions.workerSrc = "pdfjs/pdf.worker.min.js";
+    // 2. Tell PDF.js where its worker script lives (also from CDN)
+    pdfjsLib.GlobalWorkerOptions.workerSrc =
+      "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js";
   </script>
 
-  <!-- Script to load & render the PDF pages -->
+  <!-- 3. Script to load & render the PDF pages -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      const url = "my_resume.pdf"; // path to your PDF file
+      const url = "my_resume.pdf";       // path to your PDF file
       const container = document.getElementById("pdf-container");
 
-      // Load the PDF document
-      pdfjsLib.getDocument(url).promise.then(pdfDoc => {
-        // For each page, create a <canvas> and render it
-        for (let pageNum = 1; pageNum <= pdfDoc.numPages; pageNum++) {
-          pdfDoc.getPage(pageNum).then(page => {
-            const viewport = page.getViewport({ scale: 1.25 }); 
-            // Adjust scale (1.25) for clarity; change as needed
+      // Attempt to load the PDF document
+      pdfjsLib.getDocument(url).promise
+        .then(pdfDoc => {
+          // Loop through all pages and render each into a <canvas>
+          for (let pageNum = 1; pageNum <= pdfDoc.numPages; pageNum++) {
+            pdfDoc.getPage(pageNum).then(page => {
+              const viewport = page.getViewport({ scale: 1.2 }); 
+              // You can adjust 'scale' for larger/smaller rendering
 
-            const canvas = document.createElement("canvas");
-            canvas.classList.add("pdf-page-canvas");
-            canvas.height = viewport.height;
-            canvas.width = viewport.width;
-            container.appendChild(canvas);
+              // Create a new canvas for this page
+              const canvas = document.createElement("canvas");
+              canvas.classList.add("pdf-page-canvas");
+              canvas.height = viewport.height;
+              canvas.width = viewport.width;
+              container.appendChild(canvas);
 
-            const context = canvas.getContext("2d");
-            const renderContext = {
-              canvasContext: context,
-              viewport: viewport
-            };
-            page.render(renderContext);
-          });
-        }
-      }).catch(err => {
-        console.error("Error loading PDF:", err);
-        container.textContent = "Failed to load resume.";
-      });
+              // Render the PDF page into the canvas
+              const context = canvas.getContext("2d");
+              const renderContext = {
+                canvasContext: context,
+                viewport: viewport
+              };
+              page.render(renderContext);
+            });
+          }
+        })
+        .catch(err => {
+          // PDF loading failed (e.g., file not found or cross‐origin issue)
+          console.error("Error loading PDF:", err);
+          container.innerHTML = `
+            <p style="color: #e0e0e0;">
+              Unable to load resume. 
+              <a href="my_resume.pdf" download style="color: var(--button-bg);">
+                Download it here
+              </a>.
+            </p>`;
+        });
 
-      // Fullscreen button logic
+      // 4. FULLSCREEN BUTTON LOGIC
       const fsBtn = document.getElementById("fullscreen-btn");
       fsBtn.addEventListener("click", () => {
+        // Make the #pdf-container element go full‐screen
         if (container.requestFullscreen) {
           container.requestFullscreen();
         } else if (container.webkitRequestFullscreen) {
