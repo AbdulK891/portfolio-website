@@ -1,16 +1,16 @@
 // ---------------------------------------------
-// INITIAL TITLE CARD: SHOW ONLY ON FIRST VISIT & HIDE AFTER 2 SECONDS
+// INITIAL TITLE CARD: SHOW ONLY ON FIRST VISIT & HIDE AFTER 4 SECONDS
 // ---------------------------------------------
 window.addEventListener("DOMContentLoaded", () => {
   const titleCard = document.getElementById("title-card");
-  const hasSeen = sessionStorage.getItem("titleShown");
+  const hasSeen   = sessionStorage.getItem("titleShown");
 
   if (!hasSeen) {
     // First time this session: display the title card
     titleCard.style.display = "flex";
     sessionStorage.setItem("titleShown", "yes");
 
-    // Hide exactly at 2 seconds (matches the CSS animation duration)
+    // Hide exactly at 4 seconds (matches the CSS animation duration)
     setTimeout(() => {
       titleCard.style.display = "none";
     }, 4000);
