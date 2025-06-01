@@ -25,7 +25,7 @@
       Use flexbox so that the two columns (form + info)
       have independent vertical alignment. The container
       itself will be flex-start, so children start at the top,
-      then we manually push the right column down to 25% of vh.
+      then we manually push the right column down to 15% of vh.
     */
     .contact-container {
       display: flex;
@@ -99,7 +99,7 @@
       background-color: #90caf9;
     }
 
-    /* RIGHT COLUMN: Contact Info pushed down to 25vh */
+    /* RIGHT COLUMN: Contact Info pushed down to 15vh */
     .contact-info {
       color: #e0e0e0;
       font-family: 'Lato', sans-serif;
@@ -112,8 +112,8 @@
       border-left: 1px solid #333;
       padding-left: 1.5rem;
 
-      /* Push down to ~25% of viewport height */
-      margin-top: 25vh;
+      /* Push down by 15vh instead of 25vh */
+      margin-top: 15vh;
     }
     .contact-info p {
       margin-bottom: 0.8rem;
@@ -190,7 +190,7 @@
       </div>
     </div>
 
-    <!-- RIGHT COLUMN: Your Contact Information (pushed down to 25vh) -->
+    <!-- RIGHT COLUMN: Your Contact Information (pushed down to 15vh) -->
     <div class="contact-info">
       <p><strong>Email:</strong> 
         <a href="mailto:abdul-khayyum.981@gmail.com">
@@ -228,7 +228,7 @@
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
           (pos) => {
-            locationInput.value = 
+            locationInput.value =
               pos.coords.latitude.toFixed(4) + ", " + pos.coords.longitude.toFixed(4);
           },
           () => {
