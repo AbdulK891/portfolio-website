@@ -101,7 +101,7 @@ html, body {
 
 @keyframes fadeText {
   0%   { opacity: 0; }
-  20%  { opacity: 1; }   /* 0.6s: fully visible */
+  35%  { opacity: 1; }   /* 0.6s: fully visible */
   80%  { opacity: 1; }   /* 2.4s: still visible */
   100% { opacity: 1; }   /* 3s: fully faded out */
 }
