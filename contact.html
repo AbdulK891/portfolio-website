@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact | Portfolio</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <!-- EmailJS SDK (for sending emails via client-side JS) -->
+  <script type="text/javascript" src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <ul class="nav-list">
+      <li><a href="index.html" class="nav-item">Home</a></li>
+      <li><a href="projects.html" class="nav-item">Projects</a></li>
+      <li><a href="experience.html" class="nav-item">Experience</a></li>
+      <li><a href="skills.html" class="nav-item">Skills</a></li>
+      <li><a href="resume.html" class="nav-item">Resume</a></li>
+      <li><a href="contact.html" class="nav-item active">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="container">
+    <section class="contact-section">
+      <h2 class="section-title">Get in Touch</h2>
+      <div class="contact-container">
+        <!-- Contact Form -->
+        <form id="contact-form" class="contact-form">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="user_name" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="user_email" required />
+          </div>
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" name="subject" required />
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="6" required></textarea>
+          </div>
+          <!-- Hidden fields for timestamp and location -->
+          <input type="hidden" id="timestamp" name="timestamp" />
+          <input type="hidden" id="location" name="location" />
+          <button type="submit" class="submit-btn">Send Message</button>
+        </form>
+
+        <!-- Contact Info -->
+        <div class="contact-info">
+          <p><strong>Email:</strong> <a href="mailto:abdulkhayyum.981@gmail.com">abdulkhayyum.981@gmail.com</a></p>
+          <p><strong>LinkedIn:</strong> <a href="[LinkedIn-Profile-Link]" target="_blank">linkedin.com/in/abdul-khayyum-farooqui</a></p>
+          <p><strong>GitHub:</strong> <a href="[GitHub-Profile-Link]" target="_blank">github.com/yourusername</a></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
