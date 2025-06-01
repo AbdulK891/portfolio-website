@@ -8,55 +8,27 @@
 
   <style>
     /* ---------------------------------------------
-       CONTACT PAGE SPECIFIC STYLES
+       Simple styling for the Contact form and sidebar info 
     ---------------------------------------------- */
-
-    /* Center the title across the full width */
-    .contact-title {
-      text-align: center;
-      font-size: 2rem;
-      margin-top: 2rem;
-      margin-bottom: 1.5rem;
-      color: #e0e0e0;
-      font-family: 'Lora', serif;
-    }
-
-    /*
-      Use flexbox so that the two columns (form + info)
-      have independent vertical alignment. The container
-      itself will be flex-start, so children start at the top,
-      then we manually push the right column down to 10% of vh.
-    */
     .contact-container {
-      display: flex;
-      justify-content: center;
-      align-items: flex-start; /* Children start at top */
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       gap: 2rem;
       max-width: 960px;
-      margin: 0 auto 2rem; /* center horizontally, add bottom margin */
+      margin: 2rem auto;
       padding: 0 1rem;
     }
 
     @media (max-width: 768px) {
       .contact-container {
-        flex-direction: column;
-      }
-      /* On mobile, remove the divider and reset margins */
-      .contact-info {
-        border-left: none;
-        padding-left: 0;
-        margin-top: 2rem;
+        grid-template-columns: 1fr;
       }
     }
 
-    /* LEFT COLUMN: Contact Form stays at top */
     .contact-form {
       background-color: #1e1e1e;
       padding: 1.5rem;
       border-radius: 8px;
-      flex: 1 1 350px;    /* allow it to grow/shrink; min-width 350px */
-      max-width: 400px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.5);
     }
 
     .form-group {
@@ -93,41 +65,20 @@
       cursor: pointer;
       font-size: 1rem;
       font-family: 'Lato', sans-serif;
-      margin-top: 0.5rem;
     }
     .submit-btn:hover {
       background-color: #90caf9;
     }
 
-    /* RIGHT COLUMN: Contact Info pushed down to 10vh */
     .contact-info {
       color: #e0e0e0;
       font-family: 'Lato', sans-serif;
       line-height: 1.6;
-      flex: 1 1 250px;    /* allow it to grow/shrink; min-width 250px */
-      max-width: 350px;
-      text-align: left;
-
-      /* Vertical divider line on desktop */
-      border-left: 1px solid #333;
-      padding-left: 1.5rem;
-
-      /* Push down by 10vh (moved up from 15vh) */
-      margin-top: 10vh;
     }
     .contact-info p {
       margin-bottom: 0.8rem;
-      word-wrap: break-word;
-    }
-    .contact-info a {
-      color: #64b5f6;
-      text-decoration: none;
-    }
-    .contact-info a:hover {
-      text-decoration: underline;
     }
 
-    /* “Thank You” message that appears after submission */
     .thank-you {
       background-color: #2d2d2d;
       color: #90caf9;
@@ -140,7 +91,7 @@
   </style>
 </head>
 <body>
-  <!-- Navigation Bar (unchanged) -->
+  <!-- Navigation Bar -->
   <nav class="navbar">
     <ul class="nav-list">
       <li><a href="index.html" class="nav-item">Home</a></li>
@@ -152,54 +103,48 @@
     </ul>
   </nav>
 
-  <!-- Page Title (centered) -->
-  <h2 class="contact-title">Get in Touch</h2>
+  <!-- Main Content -->
+  <main class="contact-container">
+    <!-- LEFT: Contact Form -->
+    <div>
+      <h2 class="section-title">Get in Touch</h2>
+      <div class="contact-form">
+        <form id="contact-form" action="https://script.google.com/macros/s/AKfycbw2lNOcwsDC_RZfyf_KseWL72CmoCwJMvqZSNXToiYg5VUJl16xwsN4fMkFgopjHTfULg/exec" method="POST">
+          <!-- Visible fields -->
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required/>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required/>
+          </div>
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" name="subject" required/>
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+          </div>
 
-  <!-- Container for both columns (form + info) -->
-  <div class="contact-container">
-    <!-- LEFT COLUMN: Contact Form (at top of container) -->
-    <div class="contact-form">
-      <form id="contact-form" action="YOUR_SCRIPT_URL_HERE" method="POST">
-        <div class="form-group">
-          <label for="name">Name</label>
-          <input type="text" id="name" name="name" required />
-        </div>
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" required />
-        </div>
-        <div class="form-group">
-          <label for="subject">Subject</label>
-          <input type="text" id="subject" name="subject" required />
-        </div>
-        <div class="form-group">
-          <label for="message">Message</label>
-          <textarea id="message" name="message" rows="5" required></textarea>
-        </div>
+          <!-- Hidden fields for timestamp & location -->
+          <input type="hidden" id="timestamp" name="timestamp" />
+          <input type="hidden" id="location" name="location" />
 
-        <!-- Hidden fields for timestamp & location -->
-        <input type="hidden" id="timestamp" name="timestamp" />
-        <input type="hidden" id="location" name="location" />
+          <button type="submit" class="submit-btn">Send Message</button>
+        </form>
 
-        <button type="submit" class="submit-btn">Send Message</button>
-      </form>
-
-      <!-- Thank You message, hidden by default -->
-      <div id="thank-you" class="thank-you" style="display: none;">
-        Thank you! Your message has been received.
+        <!-- This <div> will show a thank‐you note after successful submission -->
+        <div id="thank-you" class="thank-you" style="display: none;">
+          Thank you! Your message has been received.
+        </div>
       </div>
     </div>
 
-    <!-- RIGHT COLUMN: Your Contact Information (pushed down to 10vh) -->
+    <!-- RIGHT: Contact Info / Links -->
     <div class="contact-info">
-      <p><strong>Email:</strong> 
-        <a href="mailto:abdul-khayyum.981@gmail.com">
-          abdul-khayyum.981@gmail.com
-        </a>
-      </p>
-      <p><strong>Phone:</strong> 
-        <a href="tel:+17328032566">(732) 803-2566</a>
-      </p>
+      <p><strong>Email:</strong> <a href="mailto:abdul-khayyum.981@gmail.com">abdul-khayyum.981@gmail.com</a></p>
       <p><strong>LinkedIn:</strong> 
         <a href="https://www.linkedin.com/in/abdul-khayyum-farooqui/" target="_blank">
           linkedin.com/in/abdul-khayyum-farooqui
@@ -211,24 +156,26 @@
         </a>
       </p>
     </div>
-  </div>
+  </main>
 
-  <!-- SCRIPT: Populate hidden fields & handle submission -->
   <script>
+    // ---------------------------------------------
+    // Populate timestamp + geolocation, then handle form submit
+    // ---------------------------------------------
     document.addEventListener("DOMContentLoaded", () => {
       const form = document.getElementById("contact-form");
       const timestampInput = document.getElementById("timestamp");
       const locationInput  = document.getElementById("location");
       const thankYouDiv    = document.getElementById("thank-you");
 
-      // 1) Populate timestamp
+      // 1) Populate timestamp on page load
       timestampInput.value = new Date().toISOString();
 
-      // 2) Attempt geolocation
+      // 2) Try to get geolocation (if allowed)
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
           (pos) => {
-            locationInput.value =
+            locationInput.value = 
               pos.coords.latitude.toFixed(4) + ", " + pos.coords.longitude.toFixed(4);
           },
           () => {
@@ -239,12 +186,14 @@
         locationInput.value = "Geolocation not supported";
       }
 
-      // 3) Intercept form submission so we can show a “Thank you” note
+      // 3) Intercept form submit so we can show “thank you” without reloading
       form.addEventListener("submit", (e) => {
         e.preventDefault();
 
-        // Use Fetch to POST the form data to your Apps Script endpoint
+        // Create a FormData object from the form fields
         const formData = new FormData(form);
+
+        // Submit via fetch() to the Google Apps Script web app
         fetch(form.action, {
           method: "POST",
           body: formData
@@ -252,17 +201,18 @@
         .then((resp) => resp.json())
         .then((data) => {
           if (data.result === "success") {
-            // Show “Thank you” message
+            // 4a) Show the thank‐you message
             thankYouDiv.style.display = "block";
-            // Clear the form after a short delay
+            // 4b) Reset the form after a brief delay
             setTimeout(() => {
               form.reset();
-              // Re‐populate timestamp for next submission
+              // repopulate timestamp for any future submissions
               timestampInput.value = new Date().toISOString();
               locationInput.value = "Not provided";
               thankYouDiv.style.display = "none";
             }, 2000);
           } else {
+            // 5) Handle error from Apps Script
             alert("Error sending form: " + data.message);
           }
         })
