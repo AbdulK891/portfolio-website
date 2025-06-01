@@ -13,7 +13,7 @@ window.addEventListener("DOMContentLoaded", () => {
     // Hide exactly at 4 seconds (matches the CSS animation duration)
     setTimeout(() => {
       titleCard.style.display = "none";
-    }, 3000);
+    }, 2500);
   } else {
     // Already seen in this session: hide immediately
     titleCard.style.display = "none";
