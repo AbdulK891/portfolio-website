@@ -69,8 +69,8 @@ html, body {
 }
 
 /* ---------------------------------------------
-   TITLE CARD (HELLO WORLD) — SHORTER & SMOOTHER
----------------------------------------------- */
+   TITLE CARD (HELLO WORLD) — DISPLAY FOR 4 SECONDS
+--------------------------------------------- */
 #title-card {
   position: fixed;
   top: 0;
@@ -82,7 +82,7 @@ html, body {
   align-items: center;
   justify-content: center;
   z-index: 999;
-  animation: fadeInOut 2s forwards;
+  animation: fadeInOut 4s forwards;
   animation-timing-function: ease-in-out;
 }
 
@@ -91,7 +91,7 @@ html, body {
   font-size: 3rem;
   color: var(--accent-color);
   opacity: 0;
-  animation: fadeText 2s forwards;
+  animation: fadeText 4s forwards;
   animation-timing-function: ease-in-out;
 }
 
@@ -368,11 +368,11 @@ html, body {
 .form-group input:focus,
 .form-group textarea:focus {
   outline: none;
-  border: 1px solid #64b5f6;
+  border: 1px solid var(--accent-color);
 }
 
 .submit-btn {
-  background-color: #64b5f6;
+  background-color: var(--accent-color);
   color: #121212;
   padding: 0.7rem 1.5rem;
   border: none;
