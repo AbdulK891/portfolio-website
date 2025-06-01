@@ -23,26 +23,25 @@
 
     /*
       Use flexbox so that the two columns (form + info)
-      are centered vertically and separated by a divider.
+      have independent vertical alignment. The container
+      itself will be flex-start, so children start at the top,
+      then we manually push the right column down to 25% of vh.
     */
     .contact-container {
       display: flex;
       justify-content: center;
-      align-items: center; /* vertical centering of children */
+      align-items: flex-start; /* Children start at top */
       gap: 2rem;
       max-width: 960px;
       margin: 0 auto 2rem; /* center horizontally, add bottom margin */
       padding: 0 1rem;
-      min-height: calc(100vh - 120px);
-      /* 100vh minus approx nav bar (60px) and title (60px) */
     }
 
     @media (max-width: 768px) {
       .contact-container {
         flex-direction: column;
-        min-height: auto;
       }
-      /* Remove the divider on small screens */
+      /* On mobile, remove the divider and reset margins */
       .contact-info {
         border-left: none;
         padding-left: 0;
@@ -50,7 +49,7 @@
       }
     }
 
-    /* LEFT COLUMN: Contact Form */
+    /* LEFT COLUMN: Contact Form stays at top */
     .contact-form {
       background-color: #1e1e1e;
       padding: 1.5rem;
@@ -100,7 +99,7 @@
       background-color: #90caf9;
     }
 
-    /* RIGHT COLUMN: Contact Info */
+    /* RIGHT COLUMN: Contact Info pushed down to 25vh */
     .contact-info {
       color: #e0e0e0;
       font-family: 'Lato', sans-serif;
@@ -112,6 +111,9 @@
       /* Vertical divider line on desktop */
       border-left: 1px solid #333;
       padding-left: 1.5rem;
+
+      /* Push down to ~25% of viewport height */
+      margin-top: 25vh;
     }
     .contact-info p {
       margin-bottom: 0.8rem;
@@ -155,7 +157,7 @@
 
   <!-- Container for both columns (form + info) -->
   <div class="contact-container">
-    <!-- LEFT COLUMN: Contact Form -->
+    <!-- LEFT COLUMN: Contact Form (at top of container) -->
     <div class="contact-form">
       <form id="contact-form" action="YOUR_SCRIPT_URL_HERE" method="POST">
         <div class="form-group">
@@ -188,7 +190,7 @@
       </div>
     </div>
 
-    <!-- RIGHT COLUMN: Your Contact Information -->
+    <!-- RIGHT COLUMN: Your Contact Information (pushed down to 25vh) -->
     <div class="contact-info">
       <p><strong>Email:</strong> 
         <a href="mailto:abdul-khayyum.981@gmail.com">
