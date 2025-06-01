@@ -21,18 +21,20 @@
       font-family: 'Lora', serif;
     }
 
-    /* Use flexbox so that the two columns (form + info) are vertically centered */
+    /*
+      Use flexbox so that the two columns (form + info)
+      are centered vertically and separated by a divider.
+    */
     .contact-container {
       display: flex;
-      flex-wrap: wrap;
       justify-content: center;
-      align-items: center; /* vertical centering */
+      align-items: center; /* vertical centering of children */
       gap: 2rem;
       max-width: 960px;
-      margin: 0 auto 2rem; /* center horizontally, add bottom space */
+      margin: 0 auto 2rem; /* center horizontally, add bottom margin */
       padding: 0 1rem;
-      min-height: calc(100vh - 100px); 
-      /* subtracting approx header/nav + title height so content is vertically centered within the page */
+      min-height: calc(100vh - 120px);
+      /* 100vh minus approx nav bar (60px) and title (60px) */
     }
 
     @media (max-width: 768px) {
@@ -40,17 +42,20 @@
         flex-direction: column;
         min-height: auto;
       }
+      /* Remove the divider on small screens */
       .contact-info {
-        margin-top: 2rem; 
+        border-left: none;
+        padding-left: 0;
+        margin-top: 2rem;
       }
     }
 
-    /* Left side: form styling (unchanged from before) */
+    /* LEFT COLUMN: Contact Form */
     .contact-form {
       background-color: #1e1e1e;
       padding: 1.5rem;
       border-radius: 8px;
-      flex: 1 1 350px; /* allow it to grow/shrink, min 350px */
+      flex: 1 1 350px;    /* allow it to grow/shrink; min-width 350px */
       max-width: 400px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.5);
     }
@@ -95,14 +100,18 @@
       background-color: #90caf9;
     }
 
-    /* Right side: contact info styling */
+    /* RIGHT COLUMN: Contact Info */
     .contact-info {
       color: #e0e0e0;
       font-family: 'Lato', sans-serif;
       line-height: 1.6;
-      flex: 1 1 250px; /* allow it to grow/shrink, min 250px */
+      flex: 1 1 250px;    /* allow it to grow/shrink; min-width 250px */
       max-width: 350px;
       text-align: left;
+
+      /* Vertical divider line on desktop */
+      border-left: 1px solid #333;
+      padding-left: 1.5rem;
     }
     .contact-info p {
       margin-bottom: 0.8rem;
@@ -181,12 +190,14 @@
 
     <!-- RIGHT COLUMN: Your Contact Information -->
     <div class="contact-info">
-      <p><strong>Email:</strong> <a href="mailto:abdul-khayyum.981@gmail.com">
-        abdul-khayyum.981@gmail.com
-      </a></p>
-      <p><strong>Phone:</strong> <a href="tel:+17328032566">
-        (732) 803-2566
-      </a></p>
+      <p><strong>Email:</strong> 
+        <a href="mailto:abdul-khayyum.981@gmail.com">
+          abdul-khayyum.981@gmail.com
+        </a>
+      </p>
+      <p><strong>Phone:</strong> 
+        <a href="tel:+17328032566">(732) 803-2566</a>
+      </p>
       <p><strong>LinkedIn:</strong> 
         <a href="https://www.linkedin.com/in/abdul-khayyum-farooqui/" target="_blank">
           linkedin.com/in/abdul-khayyum-farooqui
