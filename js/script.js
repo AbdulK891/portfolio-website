@@ -3,37 +3,32 @@
 // ---------------------------------------------
 window.addEventListener("DOMContentLoaded", () => {
   const titleCard = document.getElementById("title-card");
-  const hasSeen   = sessionStorage.getItem("titleShown");
+  const hasSeen = sessionStorage.getItem("titleShown");
 
-  if (!hasSeen) {
-    // First time this session: display the title card
+  if (!hasSeen && titleCard) {
     titleCard.style.display = "flex";
     sessionStorage.setItem("titleShown", "yes");
 
-    // Hide exactly at 4 seconds (matches the CSS animation duration)
     setTimeout(() => {
       titleCard.style.display = "none";
     }, 3000);
-  } else {
-    // Already seen in this session: hide immediately
+  } else if (titleCard) {
     titleCard.style.display = "none";
   }
 
   // ---------------------------------------------
-  // PROJECT FILTER INITIALIZATION
+  // PROJECT FILTER ENHANCED: Supports Multiple Tags
   // ---------------------------------------------
   const filterSelect = document.getElementById("project-filter");
   if (filterSelect) {
-    // Collect all project items once
     const projectItems = Array.from(document.querySelectorAll(".project-item"));
 
     filterSelect.addEventListener("change", () => {
       const selected = filterSelect.value; // e.g. "python", "all", etc.
 
       projectItems.forEach((li) => {
-        const category = li.getAttribute("data-category");
-        // Show if "all" or matches exactly; otherwise hide
-        if (selected === "all" || category === selected) {
+        const categories = li.getAttribute("data-category")?.split(" ") || [];
+        if (selected === "all" || categories.includes(selected)) {
           li.style.display = "block";
         } else {
           li.style.display = "none";
@@ -43,17 +38,15 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 
   // ---------------------------------------------
-  // CONTACT FORM: POPULATE TIMESTAMP & GEOLOCATION
+  // CONTACT FORM: TIMESTAMP & GEOLOCATION
   // ---------------------------------------------
   const form = document.getElementById("contact-form");
   if (form) {
-    // Populate timestamp on page load
     const timestampInput = document.getElementById("timestamp");
     if (timestampInput) {
       timestampInput.value = new Date().toISOString();
     }
 
-    // Attempt to get user's geolocation (if permitted)
     const locationInput = document.getElementById("location");
     if (locationInput) {
       if (navigator.geolocation) {
@@ -63,32 +56,23 @@ window.addEventListener("DOMContentLoaded", () => {
             locationInput.value = coords;
           },
           () => {
-            // User denied geolocation
             locationInput.value = "Not provided";
           }
         );
       } else {
-        // Geolocation not supported
         locationInput.value = "Geolocation not supported";
       }
     }
 
-    // Handle form submission
     form.addEventListener("submit", (event) => {
       event.preventDefault();
 
-      // Send email via EmailJS
       emailjs.sendForm("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", "#contact-form")
         .then(() => {
           alert("Your message has been sent!");
           form.reset();
-          // Update timestamp and reset location after clearing
-          if (timestampInput) {
-            timestampInput.value = new Date().toISOString();
-          }
-          if (locationInput) {
-            locationInput.value = "Not provided";
-          }
+          if (timestampInput) timestampInput.value = new Date().toISOString();
+          if (locationInput) locationInput.value = "Not provided";
         })
         .catch((error) => {
           console.error("EmailJS error:", error);
@@ -101,7 +85,6 @@ window.addEventListener("DOMContentLoaded", () => {
 // ---------------------------------------------
 // EMAILJS SETUP
 // ---------------------------------------------
-(function() {
-  // Replace 'YOUR_USER_ID' with your actual EmailJS user ID
+(function () {
   emailjs.init("YOUR_USER_ID");
 })();
