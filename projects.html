@@ -42,7 +42,7 @@
       <!-- PROJECTS LIST (dummy placeholders with clickable links) -->
       <ul class="projects-list">
         <!-- Python Projects -->
-        <li class="project-item" data-category="python">
+        <li class="project-item" data-category="python machine-learning nlp">
           <h3 class="project-title">
             <a href="#" target="_blank">Tesla Stock Price Prediction and Sentiment Analysis</a>
           </h3>
@@ -51,7 +51,7 @@
             ▪	Implemented dynamic Plotly visualizations to examine feature contributions, confidence intervals, and relationships between sentiment trajectories and price volatility, supporting model interpretability and exploratory analysis
           </p>
         </li>
-        <li class="project-item" data-category="python">
+        <li class="project-item" data-category="python machine-learning">
           <h3 class="project-title">
             <a href="#" target="_blank">Breast Cancer Classification</a>
           </h3>
@@ -60,69 +60,82 @@
             ▪	Engineered a feature extraction framework combining morphological and texture-based attributes, optimizing predictive performance and reducing classification error by 15% in ultrasound image analysis
           </p>
         </li>
+        <li class="project-item" data-category="python machine-learning">
+          <h3 class="project-title">
+            <a href="#" target="_blank">Stock Market Trend Analysis & Crisis Detection using Machine Learning</a>
+          </h3>
+          <p class="project-desc">
+            ▪	Analyzed over 340,000 global equity records across six major markets to identify long-term sector growth and volatility trends; highlighted Technology and Healthcare as consistently high-performing and resilient sectors through multiple economic cycles<br>
+            ▪	Built a production-ready XGBoost ensemble model for market crisis detection using time-series indicators and SMOTE-ENN balancing; achieved 85% recall with less than 2% false positives, enabling reliable early-warning signals for financial stress events
+          </p>
+        </li>
+        <li class="project-item" data-category="python machine-learning nlp">
+          <h3 class="project-title">
+            <a href="#" target="_blank">Customer Behavior & Marketing Analytics Using Python</a>
+          </h3>
+          <p class="project-desc">
+            ▪	Analyzed 200K+ e-commerce transactions using Python to uncover drivers of repeat purchases—such as discount levels, segment behavior, and seasonality—leading to retention strategies tailored to consumer, corporate, and home office segments<br>
+            ▪	Developed data visualizations and applied sentiment analysis (VADER) to evaluate marketing effectiveness across food and electronics sectors, producing insights on emotional loyalty, brand perception, and campaign-driven revenue impact
+          </p>
+        </li>
+        <li class="project-item" data-category="python machine-learning">
+          <h3 class="project-title">
+            <a href="#" target="_blank">Driver Drowsiness Detection System</a>
+          </h3>
+          <p class="project-desc">
+            ▪	Built a real-time drowsiness detection system using OpenCV and TensorFlow, combining Haar cascade classifiers with a custom-trained CNN on 11K+ eye images to classify alertness states with ~95% accuracy and low-latency inference<br>
+            ▪	Automated driver alerting by monitoring eye activity via webcam and triggering alarms using a Pygame mixer when drowsiness persisted, reducing false positives through a score-based threshold on both eyes
+          </p>
+        </li>
+
 
         <!-- R Projects -->
-        <li class="project-item" data-category="r">
+        <li class="project-item" data-category="python machine-learning">
           <h3 class="project-title">
             <a href="#" target="_blank">Credit Risk Modeling</a>
           </h3>
           <p class="project-desc">
-            ▪	Designed and implemented a full-stack credit risk assessment platform using XGBoost with Optuna hyperparameter tuning and under-sampling, achieving AUC 0.99, Gini 0.97, and KS 86.87% on a highly imbalanced dataset (10% defaults)<br>
-            ▪	Built a Streamlit-based interactive dashboard to automate borrower risk evaluation, integrating SHAP and LIME for interpretability, enabling real-time default probability prediction, credit scoring (300–900), and actionable insights for loan approvals
+            ▪	Developed a full credit risk modeling pipeline using Lending Club’s 800K-loan dataset to predict PD, LGD, and EAD with logistic and linear regression, enabling robust expected credit loss (ECL) estimation aligned with financial risk standards<br>
+            ▪	Deployed a real-time PD scorecard on Heroku using Flask, integrating preprocessing, scoring logic, and model inference into a seamless web interface to evaluate loan default risk, making the solution accessible and production-ready
           </p>
         </li>
-        <li class="project-item" data-category="r">
+        <li class="project-item" data-category="python machine-learning excel tableau">
           <h3 class="project-title">
             <a href="#" target="_blank">Loan Portfolio Performance Analysis and Prediction</a>
           </h3>
           <p class="project-desc">
-            ▪	Analyzed $1.7B+ in loan portfolios using SQL and Python, evaluating delinquency, charge-off, prepayment, and FICO trends; developed loss rate forecasts using vintage curves and linear regression to guide credit risk strategy and portfolio optimization<br>
-            ▪	Created interactive Tableau dashboards to visualize origination and performance trends; derived actionable insights that recommended tightening underwriting standards for Product B and reallocating resources to high-performing Product A
+            ▪	Built a machine learning pipeline to classify loans as Fully Paid or Charged Off using models like Logistic Regression and Random Forest, achieving high accuracy and model explainability through LIME and feature importance analysis<br>
+            ▪	Designed end-to-end loan risk dashboards in Power BI and SQL to track KPIs like default rates, funded amounts, and loan purpose trends, enabling data-driven recommendations for product targeting, risk monitoring, and portfolio optimization
           </p>
         </li>
 
         <!-- Excel Projects -->
-        <li class="project-item" data-category="excel">
-          <h3 class="project-title">
-            <a href="#" target="_blank">Virtual HealthCare Assistant</a>
-          </h3>
-          <p class="project-desc">
-            ▪	Designed and developed a virtual assistant using Streamlit and Groq API to provide real-time medical triage, mental health support, and personalized health advice; integrated TextBlob for sentiment analysis to adapt responses based on patient mood and tone<br>
-            ▪	Containerized the full-stack application using Docker for streamlined deployment and scalability; created an intuitive chat-based interface that simulates an empathetic virtual doctor, enhancing user trust, accessibility, and engagement in digital healthcare
-          </p>
-        </li>
+
 
         <!-- Tableau Projects -->
-        <li class="project-item" data-category="tableau">
+        <li class="project-item" data-category="python machine-learning">
           <h3 class="project-title">
             <a href="#" target="_blank">Cloud Cost Optimizer</a>
           </h3>
           <p class="project-desc">
-            ▪	Built a cloud cost optimization engine leveraging stochastic annealing and reset-based heuristics to reduce AWS EC2 deployment costs by up to 60%, optimizing across instance types, regions, usage patterns, and performance constraints<br>
-            ▪	Developed a scalable and automated experimentation framework to benchmark optimization algorithms across 10+ AWS regions and hundreds of VM types, streamlining input generation, execution, and detailed sqlite3-based result tracking
+            ▪	Designed and implemented a cloud cost optimization system that selects cost-efficient AWS instance configurations using custom fleet partitioning and real-time spot price evaluation, achieving up to 35% cost reduction across distributed workload<br>
+            ▪	Built a flexible experiment framework to evaluate search-based optimization strategies (greedy, stochastic annealing), running over 1,000 simulations across regions and producing consistent cost-performance improvements with detailed analytics.
           </p>
         </li>
 
         <!-- Machine Learning Projects -->
-        <li class="project-item" data-category="machine-learning">
+        <li class="project-item" data-category="python machine-learning nlp">
           <h3 class="project-title">
             <a href="#" target="_blank">Deepfake Detection</a>
           </h3>
           <p class="project-desc">
-            ▪	Led the end-to-end development of DeepTracersV0, an AI-powered deepfake detection platform using a hybrid of ResNet50, InceptionV3, and Vision Transformer models with blockchain-based media verification, achieving 98.64% accuracy and 15ms inference speed for real-time analysis<br>
-            ▪	Engineered a real-time detection dashboard using Streamlit and PyTorch Grad-CAM to visualize deepfake predictions, and automated the generation of PDF reports with annotated heatmaps and confidence scores, significantly improving cybersecurity workflow efficiency and forensic transparency
+            ▪	Built DeepTracersV0, a deepfake detection platform using ResNet50, InceptionV3, and Vision Transformer models trained on FaceForensics++ and DFDC; achieved 98.64% accuracy and 15ms inference speed with blockchain-based media verification<br>
+            ▪	Developed a Streamlit dashboard with Grad-CAM visualizations and automated PDF reports featuring frame-level heatmaps and confidence scores, improving forensic workflows and detection transparency
           </p>
         </li>
 
         <!-- NLP Projects -->
-        <li class="project-item" data-category="nlp">
-          <h3 class="project-title">
-            <a href="#" target="_blank">NLP Pipeline A</a>
-          </h3>
-          <p class="project-desc">
-            Dummy NLP project placeholder description.
-          </p>
-        </li>
+
       </ul>
     </section>
   </main>
