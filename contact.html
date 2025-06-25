@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact | Portfolio</title>
+  <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #121212;
+      color: #e0e0e0;
+      font-family: 'Lato', sans-serif;
+    }
+
+    .contact-title {
+      text-align: center;
+      font-size: 2rem;
+      margin: 2rem 0 1.5rem;
+      color: #e0e0e0;
+      font-family: 'Lora', serif;
+    }
+
+    .contact-container {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;  /* keep left & right aligned at top */
+      gap: 2rem;
+      max-width: 960px;
+      margin: 0 auto 2rem;
+      padding: 0 1rem;
+    }
+
+    /* Ensure the divider takes up the full height of its container */
+    .divider {
+      width: 1px;
+      background-color: #444;
+      align-self: stretch;  /* stretch from top to bottom of container */
+    }
+
+    /* On mobile, hide divider and stack */
+    @media (max-width: 768px) {
+      .contact-container {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .divider {
+        display: none;
+      }
+
+      .contact-info {
+        margin-top: 2rem;
+        padding-left: 0;
+      }
+    }
+
+    .contact-form {
+      background-color: #1e1e1e;
+      padding: 1.5rem;
+      border-radius: 8px;
+      flex: 1 1 350px;
+      max-width: 400px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.4rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.6rem;
+      border: none;
+      border-radius: 4px;
+      background-color: #2c2c2c;
+      color: #e0e0e0;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border: 1px solid #64b5f6;
+    }
+
+    .submit-btn {
+      background-color: #64b5f6;
+      color: #121212;
+      padding: 0.7rem 1.5rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1rem;
+      margin-top: 0.5rem;
+    }
+
+    .submit-btn:hover {
+      background-color: #90caf9;
+    }
+
+    .contact-info {
+      flex: 1 1 300px;
+      max-width: 350px;
+      padding-left: 1.5rem;
+      padding-top: 2.5rem;
+    }
+
+    .contact-info p {
+      margin-bottom: 0.8rem;
+      word-wrap: break-word;
+    }
+
+    .contact-info a {
+      color: #64b5f6;
+      text-decoration: none;
+    }
+
+    .contact-info a:hover {
+      text-decoration: underline;
+    }
+
+    .thank-you {
+      background-color: #2d2d2d;
+      color: #90caf9;
+      padding: 1rem;
+      border-radius: 8px;
+      text-align: center;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <ul class="nav-list">
+      <li><a href="index.html" class="nav-item">Home</a></li>
+      <li><a href="projects.html" class="nav-item">Projects</a></li>
+      <li><a href="publications.html" class="nav-item">Publications</a></li>
+      <li><a href="experience.html" class="nav-item">Experience</a></li>
+      <li><a href="skills.html" class="nav-item">Skills</a></li>
+      <li><a href="contact.html" class="nav-item active">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Page Title -->
+  <h2 class="contact-title">Get in Touch</h2>
+
+  <!-- Contact Section -->
+  <div class="contact-container">
+    <!-- Contact Form -->
+    <div class="contact-form">
+      <form id="contact-form"
+            action="https://script.google.com/macros/s/AKfycbw2lNOcwsDC_RZfyf_KseWL72CmoCwJMvqZSNXToiYg5VUJl16xwsN4fMkFgopjHTfULg/exec"
+            method="POST"
+      >
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required />
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+        <div class="form-group">
+          <label for="subject">Subject</label>
+          <input type="text" id="subject" name="subject" required />
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+        </div>
+
+        <input type="hidden" id="timestamp" name="timestamp" />
+        <input type="hidden" id="location" name="location" />
+
+        <button type="submit" class="submit-btn">Send Message</button>
+      </form>
+
+      <div id="thank-you" class="thank-you" style="display: none;">
+        Thank you! Your message has been received.
+      </div>
+    </div>
+
+    <!-- Divider Line (now full height) -->
+    <div class="divider"></div>
+
+    <!-- Contact Info Section -->
+    <div class="contact-info">
+      <p><strong>Email:</strong>
+        <a href="mailto:abdulkhayyum.981@gmail.com">abdulkhayyum.981@gmail.com</a>
+      </p>
+      <p><strong>Phone:</strong>
+        <a href="tel:+17328032566">(732) 803-2566</a>
+      </p>
+      <p><strong>LinkedIn:</strong>
+        <a href="https://www.linkedin.com/in/abdul-khayyum-farooqui/" target="_blank">
+          linkedin.com/in/abdul-khayyum-farooqui
+        </a>
+      </p>
+      <p><strong>GitHub:</strong>
+        <a href="https://github.com/abdulk891" target="_blank">
+          github.com/abdulk891
+        </a>
+      </p>
+    </div>
+  </div>
+
+  <!-- JS Script for Timestamp & Submission -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("contact-form");
+      const timestampInput = document.getElementById("timestamp");
+      const locationInput  = document.getElementById("location");
+      const thankYouDiv    = document.getElementById("thank-you");
+
+      // Initialize timestamp immediately
+      timestampInput.value = new Date().toISOString();
+
+      // Attempt to get geolocation
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (pos) => {
+            locationInput.value =
+              pos.coords.latitude.toFixed(4)
+              + ", "
+              + pos.coords.longitude.toFixed(4);
+          },
+          () => {
+            locationInput.value = "Not provided";
+          }
+        );
+      } else {
+        locationInput.value = "Geolocation not supported";
+      }
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const formData = new FormData(form);
+
+        fetch(form.action, {
+          method: "POST",
+          body: formData
+        })
+        .then((resp) => resp.json())
+        .then((data) => {
+          if (data.result === "success") {
+            thankYouDiv.style.display = "block";
+            setTimeout(() => {
+              form.reset();
+              timestampInput.value = new Date().toISOString();
+              locationInput.value = "Not provided";
+              thankYouDiv.style.display = "none";
+            }, 3500);
+          } else {
+            alert("Error sending form: " + data.message);
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+          alert("There was a problem submitting the form. Please try again later.");
+        });
+      });
+    });
+  </script>
+</body>
+</html>
